@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Yeee</title>
+  <meta name='description' content='Página legal'>
+  
+  <link rel='stylesheet' type='text/css' href='stylesheets/materialize.min.css'>
+  <link rel='stylesheet' type='text/css' href='stylesheets/main.css'>
+  
+</head>
+
+<body class='blue-grey lighten-5'>
+
+  <nav class='m-4'>
+    <div class='nav-wrapper light-blue darken-3'>
+      <div class='container'>
+        <a href='/' class='brand-logo left'>Moving Pictures</a>
+        <ul id='nav-mobile' class='right'>
+          <li><a href='#'>Github repo</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class='container'>
+    <div class='section'>
+      <form action='' id='searchForm'>
+        <h5>Procure por um filme ou série</h5>
+        <div class='input-field col s12'>
+          <input type='text' id='searchText' placeholder='Digite aqui'>
+        </div>
+      </form>
+    </div> 
+  </section>
+
+  <section class='container'>
+    <div id='movies' class='row'>
+      <div id='result'></div>
+    </div>
+  </section>
+
+</body>
+<script src='javascript/jquery-3.3.1.min.js'></script>
+<script src='javascript/key.js'></script>
+<script src='javascript/main.js'></script>
+
+</html>
