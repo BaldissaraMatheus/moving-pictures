@@ -1,30 +1,12 @@
 $(document).ready(() => {
-  
+  let searchText = 'raw';
+  getMovies(searchText);
+
   $('#searchForm').on('submit', (e) => {
-    let searchText = console.log($('#searchText').val());
-    
+    searchText = ($('#searchText').val());
     clearCards();
     getMovies(searchText);
     e.preventDefault();
-  });
-  
-  let searchResult = 'raw';
-
-  $.ajax({
-    method: 'GET',
-    url: `http://www.omdbapi.com/?t=${searchResult}&apikey=${key}`,
-    dataType: 'json'
-
-  }).done((data) => {   
-    const title = data.Title;
-    const plot = data.Plot;
-    const poster = data.Poster;
-
-    $.get('includes/card.inc.html', (data) => {
-      $('#result').append(data);
-      $('#card-content').text(title).removeAttr('id');
-      $('#card-image').attr('src', poster).removeAttr('id');
-     });
   });
 });
 
@@ -43,14 +25,41 @@ function getMovies(input) {
        $('#result').append(html);
        $('#card-content').text(movie.Title).removeAttr('id');
        $('#card-image').attr('src', movie.Poster).removeAttr('id');
-      });
-      
+       $('#details-button').attr('onClick', `movieSelected("${movie.imdbID}")`).removeAttr('id');
+      });      
     });  
-  }).fail(()=> {
-    console.log('erro');
   });
 }
 
 function clearCards() {
   $('#result').html('');
+}
+
+function movieSelected(id) {
+  sessionStorage.setItem('movieId', id);
+  window.location = 'details.html';
+  return false;
+}
+
+function getMovie() {
+  const movieId = sessionStorage.getItem('movieId');
+
+  $.ajax({
+    method: 'GET',
+    url: `http://www.omdbapi.com/?i=${movieId}&apikey=${key}`,
+    dataType: 'json'
+
+  }).done((movie) => {
+    $.get('includes/details.inc.html', (html) => {     
+      $('#movie-details').append(html);
+      $('#poster').attr('src', movie.Poster);
+      $('#title').text(movie.Title);
+      $('#genre').text(movie.Genre);
+      $('#year').text(movie.Year);
+      $('#rated').text(movie.Rated);      
+      $('#director').text(movie.Director);
+      $('#actors').text(movie.Actors);   
+      $('#rating').text(movie.imdbRating);                
+     });
+  });  
 }
