@@ -1,9 +1,7 @@
 $(document).ready(() => {
-  let searchText = 'raw';
-  getMovies(searchText);
-
   $('#searchForm').on('submit', (e) => {
-    searchText = ($('#searchText').val());
+    let searchText = ($('#searchText').val());
+    
     clearCards();
     getMovies(searchText);
     e.preventDefault();
@@ -17,7 +15,6 @@ function getMovies(input) {
     dataType: 'json'
     
   }).done((data) => {
-    console.log(data);
     $.each(data.Search, (i) => { 
       const movie = data.Search[i];
       
